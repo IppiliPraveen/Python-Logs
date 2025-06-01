@@ -72,13 +72,21 @@
     </style>
 </head>
 
+
 <body>
-    <h2>Logger Level Control Panel</h2>
+    <div style="text-align: center;">
+        <img src="{{ url_for('static', filename='Conduent.png') }}" alt="Logo"
+            style="height: 80px; vertical-align: middle; margin-right: 20px;">
+    </div>
+    <div style="text-align: left;">
+        <h2 style="display: inline-block; vertical-align: middle;">CMdS Python Loggers Control Panel</h2>
+    </div>
+
     {% for name, file in loggers.items() %}
     {% if name and name != 'root' %}
     <div class="logger">
         <strong>{{ name }}</strong> &mdash;
-        File: <code>{{ file | e if file else 'N/A' }}</code><br><br>
+        File: <code>{{ file.split('\\')[-1] if file else 'N/A' }}</code><br><br>
 
         {% for level in ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'] %}
         <form method="POST" action="/set_level">
@@ -93,10 +101,12 @@
     </div>
     {% endif %}
     {% endfor %}
-
     <footer>
-        &copy; {{ now.year if now else '2025' }} Logger Admin Panel
+        &copy; {{ now.year if now else '2025' }}
+        Copyright Conduent, Inc. All rights reserved. Conduent® and Conduent Agile Star®
+        are trademarks of Conduent, Inc. and/or its subsidiaries in the United States and/or other countries.
     </footer>
+
 </body>
 
 </html>

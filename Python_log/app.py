@@ -24,7 +24,7 @@ def getProvider():
     return jsonify({"provider": result})
 
 
-@app.route('/')
+@app.route('/loggers')
 def index():
     loggers = logger_file_map  # Always returns fresh, non-mutated map
     current_levels = {
@@ -41,7 +41,7 @@ def set_level():
 
     log = logger(name if name != 'root' else None)
     log.setLevel(level)
-    return redirect('/')
+    return redirect('/loggers')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8000)
